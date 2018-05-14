@@ -22,7 +22,7 @@ public class LinkedinLoginTest {
 		WebElement passwordField = webDriver.findElement(By.id("login-password"));
 		WebElement signInButton = webDriver.findElement(By.id("login-submit"));
 
-		Assert.assertFalse(signInButton.isDisplayed(),
+		Assert.assertTrue(signInButton.isDisplayed(),
 				"Sign In button is not Displayed");
 
 		emailField.sendKeys("iteatest@i.ua");
