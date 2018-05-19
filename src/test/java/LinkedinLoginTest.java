@@ -20,31 +20,33 @@ public class LinkedinLoginTest {
 
 	@Test
 	public void successfulLoginTest() {
-		String actualLoginPageTitle = webDriver.getTitle();
-
-		Assert.assertEquals(actualLoginPageTitle,
+        LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
+		Assert.assertEquals(linkedinLoginPage.getCurrentTitle(),
 				"LinkedIn: Log In or Sign Up",
 				"Login page Title is wrong");
+        Assert.assertTrue(linkedinLoginPage.isSignInButtonDisplayed(),
+                "Sign In button is not Displayed");
 
-		LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage();
         linkedinLoginPage.login("iteatest@i.ua", "1q2w3e_4r5t");
 
-		//Assert.assertTrue(signInButton.isDisplayed(),
-		//		"Sign In button is not Displayed");
-
-		Assert.assertEquals(webDriver.getCurrentUrl(),
+        LinkedinHomePage linkedinHomePage = new LinkedinHomePage(webDriver);
+		Assert.assertEquals(linkedinHomePage.getCurrentUrl(),
 				"https://www.linkedin.com/feed/",
 				"Home page url is wrong.");
-
-		String actualHomePageTitle = webDriver.getTitle();
-
-		Assert.assertNotEquals(actualLoginPageTitle, actualHomePageTitle,
-				"Page title did not change after Sign In");
-
-
-		Assert.assertTrue(webDriver.getTitle().contains("LinkedIn"),
-				"Home page url is wrong.");
+		Assert.assertTrue(linkedinHomePage.getCurrentTitle().contains("LinkedIn"),
+				"Home page Title is wrong.");
 	}
+
+
+
+
+
+
+
+
+
+
+
 
 	@Test
 	public void negativeLoginTest() throws InterruptedException {
@@ -54,16 +56,10 @@ public class LinkedinLoginTest {
                 "LinkedIn: Log In or Sign Up",
                 "Login page Title is wrong");
 
-        WebElement emailField = webDriver.findElement(By.id("login-email"));
-        WebElement passwordField = webDriver.findElement(By.id("login-password"));
-        WebElement signInButton = webDriver.findElement(By.id("login-submit"));
-
-        Assert.assertTrue(signInButton.isDisplayed(),
+        LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
+        Assert.assertTrue(linkedinLoginPage.isSignInButtonDisplayed(),
                 "Sign In button is not Displayed");
-
-        emailField.sendKeys("iteatest@i.ua");
-        passwordField.sendKeys("1");
-        signInButton.click();
+        linkedinLoginPage.login("iteatest@i.ua", "1");
 
         sleep (3000);
 
