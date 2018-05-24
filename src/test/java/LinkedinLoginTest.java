@@ -21,7 +21,7 @@ public class LinkedinLoginTest {
     public Object[][] validDataProvider() {
         return new Object[][]{
                 { "iteatest@i.ua", "1q2w3e_4r5t" },
-                { "ITEATEST@I.UA", "1q2w3e_4r5t" }
+               // { "ITEATEST@I.UA", "1q2w3e_4r5t" }
         };
     }
 
@@ -34,10 +34,9 @@ public class LinkedinLoginTest {
         Assert.assertTrue(linkedinLoginPage.isSignInButtonDisplayed(),
                 "Sign In button is not Displayed");
 
-        linkedinLoginPage.login(email, password);
+        LinkedinHomePage linkedinHomePage = linkedinLoginPage.login(email, password);
 
-        LinkedinHomePage linkedinHomePage = new LinkedinHomePage(webDriver);
-		Assert.assertEquals(linkedinHomePage.getCurrentUrl(),
+        Assert.assertEquals(linkedinHomePage.getCurrentUrl(),
 				"https://www.linkedin.com/feed/",
 				"Home page url is wrong.");
 		Assert.assertTrue(linkedinHomePage.getCurrentTitle().contains("LinkedIn"),
@@ -57,12 +56,10 @@ public class LinkedinLoginTest {
         LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(webDriver);
         Assert.assertTrue(linkedinLoginSubmitPage.isPageLoaded(),
                 "Login-Submit page is not loaded.");
-        Assert.assertEquals(linkedinLoginSubmitPage.getErrorMessageText(), "",
+        Assert.assertEquals(linkedinLoginSubmitPage.getErrorMessageText(),
+                "There were one or more errors in your submission. Please correct the marked fields below.",
                 "Error message text is incorrect.");
     }
-
-
-
 
     @AfterMethod
     public void after() {
