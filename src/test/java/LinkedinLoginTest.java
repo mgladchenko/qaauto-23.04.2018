@@ -6,6 +6,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
 import static java.lang.Thread.sleep;
 
 public class LinkedinLoginTest {
@@ -14,6 +16,7 @@ public class LinkedinLoginTest {
     @BeforeMethod
     public void before() {
         webDriver = new FirefoxDriver();
+        //webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         webDriver.get("https://www.linkedin.com/");
     }
 
