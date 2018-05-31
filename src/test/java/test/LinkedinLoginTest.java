@@ -1,3 +1,5 @@
+package test;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
@@ -5,20 +7,13 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import java.util.concurrent.TimeUnit;
+import page.LinkedinHomePage;
+import page.LinkedinLoginPage;
+import page.LinkedinLoginSubmitPage;
 
 import static java.lang.Thread.sleep;
 
-public class LinkedinLoginTest {
-    WebDriver webDriver;
-
-    @BeforeMethod
-    public void before() {
-        webDriver = new FirefoxDriver();
-        //webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        webDriver.get("https://www.linkedin.com/");
-    }
+public class LinkedinLoginTest extends LinkedinBaseTest{
 
     @DataProvider
     public Object[][] validDataProvider() {
@@ -30,7 +25,6 @@ public class LinkedinLoginTest {
 
 	@Test(dataProvider="validDataProvider")
 	public void successfulLoginTest(String email, String password) {
-        LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
 		Assert.assertEquals(linkedinLoginPage.getCurrentTitle(),
 				"LinkedIn: Log In or Sign Up",
 				"Login page Title is wrong");
@@ -46,7 +40,6 @@ public class LinkedinLoginTest {
 
 	@Test
 	public void negativeReturnedToLoginSubmitTest() throws InterruptedException {
-        LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
         Assert.assertTrue(linkedinLoginPage.isPageLoaded(),
                 "Login Page is not loaded.");
         linkedinLoginPage.login("iteatest@i.ua", "1");
@@ -61,10 +54,6 @@ public class LinkedinLoginTest {
                 "Error message text is incorrect.");
     }
 
-    @AfterMethod
-    public void after() {
-        webDriver.close();
-    }
 
 
 

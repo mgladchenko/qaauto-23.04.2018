@@ -1,3 +1,5 @@
+package page;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,7 +15,7 @@ public class LinkedinHomePage extends LinkedinBasePage {
         PageFactory.initElements(webDriver, this);
     }
 
-    boolean isPageLoaded() {
+    public boolean isPageLoaded() {
         return profileNavItem.isDisplayed();
     }
 }
