@@ -18,16 +18,16 @@ public class LinkedinRequestPasswordResetSubmitPage extends LinkedinBasePage {
     }
 
     public boolean isPageLoaded() {
+        waitUntilElementIsClickable(resendLinkButton, 300);
         return resendLinkButton.isDisplayed();
     }
 
     public LinkedinSetNewPasswordPage navigateToLinkFromEmail() {
-        //navigate
         String messageSubject = "here's the link to reset your password";
         String messageTo = "postoltest@gmail.com";
         String messageFrom = "security-noreply@linkedin.com";
         String message = gMailService.waitMessage(
-                messageSubject, messageTo, messageFrom, 60);
+                messageSubject, messageTo, messageFrom, 300);
 
         String resetPasswordLink = StringUtils.substringBetween(
                 message,

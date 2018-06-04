@@ -2,17 +2,14 @@ package test;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import page.LinkedinHomePage;
-import page.LinkedinRequestPasswordResetPage;
-import page.LinkedinRequestPasswordResetSubmitPage;
-import page.LinkedinSetNewPasswordPage;
+import page.*;
 
 public class LinkedinResetPasswordTest extends LinkedinBaseTest {
 
     @Test
     public void successfulPasswordResetTest() {
         String userEmail = "postoltest@gmail.com";
-        String newUserPassword = "P@ssword12345";
+        String newUserPassword = "P@ssword123";
 
         LinkedinRequestPasswordResetPage linkedinRequestPasswordResetPage =
               linkedinLoginPage.clickOnForgotPasswordLink();
@@ -29,7 +26,7 @@ public class LinkedinResetPasswordTest extends LinkedinBaseTest {
         Assert.assertTrue(linkedinSetNewPasswordPage.isPageLoaded(),
                 "SetNewPasswordPage is not loaded.");
 
-        /*LinkedinSuccessfulPasswordResetPage linkedinSuccessfulPasswordResetPage =
+        LinkedinSuccessfulPasswordResetPage linkedinSuccessfulPasswordResetPage =
                 linkedinSetNewPasswordPage.submitNewPassword(newUserPassword);
         Assert.assertTrue(linkedinSuccessfulPasswordResetPage.isPageLoaded(),
                 "SuccessfulPasswordResetPage is not loaded.");
@@ -37,7 +34,7 @@ public class LinkedinResetPasswordTest extends LinkedinBaseTest {
         LinkedinHomePage linkedinHomePage =
                 linkedinSuccessfulPasswordResetPage.clickOnGoToHomeButton();
         Assert.assertTrue(linkedinHomePage.isPageLoaded(),
-                "HomePage is not loaded.");*/
+                "HomePage is not loaded.");
 
 
 

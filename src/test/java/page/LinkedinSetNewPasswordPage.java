@@ -1,11 +1,21 @@
 package page;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static java.lang.Thread.sleep;
-
 public class LinkedinSetNewPasswordPage extends LinkedinBasePage {
+
+    @FindBy(xpath = "//input[@id='newPassword']")
+    private WebElement newPasswordField;
+
+    @FindBy(xpath = "//input[@id='confirmPassword']")
+    private WebElement confirmPasswordField;
+
+    @FindBy(xpath = "//button[@id='reset-password-submit-button']")
+    private WebElement submitButton;
+
 
     public LinkedinSetNewPasswordPage(WebDriver webDriver) {
         super(webDriver);
@@ -13,11 +23,13 @@ public class LinkedinSetNewPasswordPage extends LinkedinBasePage {
     }
 
     public boolean isPageLoaded() {
-        try {
-            sleep(50000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return false;
+        return newPasswordField.isDisplayed();
+    }
+
+    public LinkedinSuccessfulPasswordResetPage submitNewPassword(String newUserPassword) {
+        newPasswordField.sendKeys(newUserPassword);
+        confirmPasswordField.sendKeys(newUserPassword);
+        submitButton.click();
+        return new LinkedinSuccessfulPasswordResetPage(webDriver);
     }
 }
