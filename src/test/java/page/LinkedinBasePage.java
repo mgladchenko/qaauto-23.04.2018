@@ -6,10 +6,17 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import util.GMailService;
 
+/**
+ * Base Page Object class
+ */
 public abstract class LinkedinBasePage {
     protected WebDriver webDriver;
     protected static GMailService gMailService = new GMailService();
 
+    /**
+     * Constructor of BasePage
+     * @param webDriver - webDriver instance
+     */
     public LinkedinBasePage (WebDriver webDriver) {
         this.webDriver = webDriver;
     }

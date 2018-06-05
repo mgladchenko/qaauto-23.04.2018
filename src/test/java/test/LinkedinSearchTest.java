@@ -27,7 +27,7 @@ public class LinkedinSearchTest extends LinkedinBaseTest{
                 "Count of search result items is wrong.");
 
         for (String searchResult:searchResultsList) {
-            Assert.assertTrue(searchResult.contains(searchTerm),
+            Assert.assertTrue(searchResult.toLowerCase().contains(searchTerm.toLowerCase()),
                     "Searchterm "+searchTerm+" was not found in: \n"+searchResult);
         }
 
